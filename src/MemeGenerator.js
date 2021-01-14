@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 
 class MemeGenerator extends Component {
-    constructor() {
-        super()
-        this.state = {
-            topText: "",
-            bottomText: "",
-            randomImg: "http://i.imgflip.com/1bij.jpg",
-            allMemeImages: []
-        }
-        this.handleChange = this.handleChange.bind(this)
-        this.handleSubmit = this.handleSubmit.bind(this)
+    state = {
+        topText: "",
+        bottomText: "",
+        randomImg: "http://i.imgflip.com/1bij.jpg",
+        allMemeImages: []
     }
+    // you can get rid of bind if you use arrow functions
+    // this.handleChange = this.handleChange.bind(this)
+    // this.handleSubmit = this.handleSubmit.bind(this)
 
     componentDidMount() {
         fetch("https://api.imgflip.com/get_memes")
@@ -23,10 +21,11 @@ class MemeGenerator extends Component {
             )
     }
 
-    handleChange(e) {
+    // use arrow functions!
+    handleChange = (e) => {
         this.setState({ [e.target.name]: e.target.value })
     }
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault()
         const randomNum = Math.floor(Math.random() * this.state.allMemeImages.length)
         const randomMemeImg = this.state.allMemeImages[randomNum].url
